@@ -74,3 +74,135 @@ func TestMatchesInt(t *testing.T) {
 		t.Error("Added label %v with value %v, but when checking, label matched %v", label, value, bad)
 	}
 }
+
+func TestLtInt(t *testing.T) {
+	m := encoder.NewMetadata(nil)
+	const label string = "foo"
+	const value int = 100
+	const good int = 101
+	const bad int = 99
+
+	m.AddLabel(label, value)
+	if !m.LabelLessThanInt(label, good) {
+		t.Error("Added label %v with value %v, but when checking, %v:%v < %v was false", label, value, label, value, good)
+	}
+
+	if m.LabelLessThanInt(label, bad) {
+		t.Error("Added label %v with value %v, but when checking, %v:%v < %v was true", label, value, label, value, bad)
+	}
+}
+
+func TestGtInt(t *testing.T) {
+	m := encoder.NewMetadata(nil)
+	const label string = "foo"
+	const value int = 100
+	const good int = 99
+	const bad int = 101
+
+	m.AddLabel(label, value)
+	if !m.LabelGreaterThanInt(label, good) {
+		t.Error("Added label %v with value %v, but when checking, %v:%v > %v was false", label, value, label, value, good)
+	}
+
+	if m.LabelGreaterThanInt(label, bad) {
+		t.Error("Added label %v with value %v, but when checking, %v:%v > %v was true", label, value, label, value, bad)
+	}
+}
+
+func TestGtEqInt(t *testing.T) {
+	m := encoder.NewMetadata(nil)
+	const label string = "foo"
+	const value int = 100
+	const good int = 99
+	const bad int = 101
+
+	m.AddLabel(label, value)
+	if !m.LabelGEqInt(label, good) {
+		t.Error("Added label %v with value %v, but when checking, %v:%v > %v was false", label, value, label, value, good)
+	}
+
+	if m.LabelGEqInt(label, bad) {
+		t.Error("Added label %v with value %v, but when checking, %v:%v > %v was true", label, value, label, value, bad)
+	}
+}
+
+func TestLtEqInt(t *testing.T) {
+	m := encoder.NewMetadata(nil)
+	const label string = "foo"
+	const value int = 100
+	const good int = 101
+	const bad int = 99
+
+	m.AddLabel(label, value)
+	if !m.LabelLEqInt(label, good) {
+		t.Error("Added label %v with value %v, but when checking, %v:%v < %v was false", label, value, label, value, good)
+	}
+
+	if m.LabelLEqInt(label, bad) {
+		t.Error("Added label %v with value %v, but when checking, %v:%v < %v was true", label, value, label, value, bad)
+	}
+}
+
+func TestNEqInt(t *testing.T) {
+	m := encoder.NewMetadata(nil)
+	const label string = "foo"
+	const value int = 100
+	const bad int = 99
+
+	m.AddLabel(label, value)
+	if m.LabelNEqInt(label, value) {
+		t.Error("Added label %v with value %v, but when checking, label didn't match %v.", label, value, value)
+	}
+
+	if !m.LabelNEqInt(label, bad) {
+		t.Error("Added label %v with value %v, but when checking, label matched %v", label, value, bad)
+	}
+}
+
+func TestLabelExistsError(t *testing.T) {
+	m := encoder.NewMetadata(nil)
+	const label string = "foo"
+	const value int = 100
+
+	m.AddLabel(label, value)
+	err := m.AddLabel(label, value)
+	if err == nil {
+		t.Error("Expected an error, received no error.")
+	}
+}
+
+func TestLabelMatches(t *testing.T) {
+	m := encoder.NewMetadata(nil)
+	const label string = "foo"
+	const value int = 100
+	const bad = "bar"
+
+	m.AddLabel(label, value)
+	if !m.LabelMatches(label, value) {
+		t.Error("Added label %v with value %v, but when checking, label didn't match %v", label, value, value)
+	}
+
+	if m.LabelMatches(label, bad) {
+		t.Error("Added label %v with value %v, but when checking, label surprisingly matched %v", label, value, bad)
+	}
+}
+
+func TestLabelMatchesWith(t *testing.T) {
+	m := encoder.NewMetadata(nil)
+	const label string = "foo"
+	const value int = 100
+	const bad = "bar"
+
+	matcher := func(a, b interface{}) bool {
+		return a == b
+	}
+
+	m.AddLabel(label, value)
+	if !m.LabelMatchesWith(label, value, matcher) {
+		t.Error("Added label %v with value %v, but when checking, label didn't match %v", label, value, value)
+	}
+
+	if m.LabelMatches(label, matcher) {
+		t.Error("Added label %v with value %v, but when checking, label surprisingly matched %v", label, value, bad)
+	}
+}
