@@ -206,3 +206,15 @@ func TestLabelMatchesWith(t *testing.T) {
 		t.Error("Added label %v with value %v, but when checking, label surprisingly matched %v", label, value, bad)
 	}
 }
+
+func TestUIDGenerator(t *testing.T) {
+	encoder.ResetUIDGenerator()
+	defer encoder.ResetUIDGenerator()
+	x1 := encoder.UID()
+	x2 := encoder.UID()
+	x3 := encoder.UID()
+
+	if x1 != 1 || x2 != 2 || x3 != 3 {
+		t.Error("UID generator did not return the proper values:\t%v, %v, %v", x1, x2, x3)
+	}
+}

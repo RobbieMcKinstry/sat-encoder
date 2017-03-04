@@ -1,5 +1,10 @@
 package encoder
 
+import (
+	"github.com/mitchellh/go-sat/cnf"
+)
+
+// Owner must implement the Constrainer interface
 func NewMetadata(owner interface{}) *Metadata {
 	return &Metadata{
 		owner: owner,
@@ -7,10 +12,38 @@ func NewMetadata(owner interface{}) *Metadata {
 	}
 }
 
-func (m *Metadata) Satisfies(p Proposition) bool {
-	return p(m)
+func (this *Metadata) GetMetadata() *Metadata {
+	return this
 }
 
+func (m *Metadata) Satisfies(c Constraint) bool {
+	return c.prop(m)
+}
+
+func NewConstraint(p Proposition) *Constraint {
+	return &Constraint{
+		uid:  UID(),
+		prop: p,
+	}
+}
+
+/*
+THIS IS TOTALLY WRONG
+
+func (m *Metadata) Encode(constraints []Constraint) cnf.Clause {
+	// iterate over the constraints, testing to see if they are satisfied.
+	literals := cnf.Lit{}
+	for _, constraint := range constraints {
+		literals = append(literals, m.encodeLit(constraint))
+	}
+	return cnf.Clause(literals)
+}
+
+func (m *Metadata) encodeLit(constraint Constraint) cnf.Lit {
+	ok := m.Satisfies(constraint)
+	return cnf.NewLit(constraint.uid, ok)
+}
+*/
 func (m *Metadata) AddLabel(label string, val interface{}) error {
 	if _, ok := m.data[label]; ok {
 		return LabelExistsError{label}

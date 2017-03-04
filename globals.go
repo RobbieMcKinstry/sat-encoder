@@ -1,6 +1,10 @@
 package encoder
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/mitchellh/go-sat/cnf"
+)
 
 type (
 	Metadata struct {
@@ -10,9 +14,10 @@ type (
 	}
 
 	Constrainer interface {
-		Add(string, interface{}) error
-		Satisfies(Proposition) bool
-		Encode([]Proposition) []int
+		AddLabel(string, interface{}) error
+		Satisfies(Constraint) bool
+		Encode([]Constraint) cnf.Clause
+		GetMetadata() *Metadata
 	}
 
 	LabelExistsError struct {
@@ -20,10 +25,15 @@ type (
 	}
 
 	Proposition func(*Metadata) bool
+
+	Constraint struct {
+		uid  int
+		prop Proposition
+	}
 )
 
 // For a constraint C,
-// Find the Propositions that do not satisfy C
+// Find the Propositions that do satisfy C
 // Conjunct them with ¬C
 
 // a -> arrays constraint
@@ -58,4 +68,26 @@ func IntProposition(label string, val int) Proposition {
 
 func (l LabelExistsError) Error() string {
 	return fmt.Sprintf("The label %s already exists.", l.label)
+}
+
+var UID func() int = makeUIDGenerator()
+
+func makeUIDGenerator() func() int {
+	var n int = 1
+	buf := make(chan int)
+
+	go func() {
+		for {
+			buf <- n
+			n++
+		}
+	}()
+
+	return func() int {
+		return <-buf
+	}
+}
+
+func ResetUIDGenerator() {
+	UID = makeUIDGenerator()
 }
