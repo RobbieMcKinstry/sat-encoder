@@ -1,9 +1,5 @@
 package encoder
 
-import (
-	"github.com/mitchellh/go-sat/cnf"
-)
-
 // Owner must implement the Constrainer interface
 func NewMetadata(owner interface{}) *Metadata {
 	return &Metadata{

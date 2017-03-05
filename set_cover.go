@@ -13,7 +13,6 @@ type setElem struct {
 // TODO add a func on Constrainer that is called Name()
 // Merge the toMetadata and the toSetElem funcs into one...
 // it should take the constrainer and derive from it the Name, the UID, and the Metadata
-
 func SetCover(dataSet []Constrainer, constraints []Constraint) []Constrainer {
 
 	metadataSet := toMetadataSet(dataSet)
@@ -32,7 +31,7 @@ func SetCover(dataSet []Constrainer, constraints []Constraint) []Constrainer {
 
 		// create a literal for each of the elements on the subset
 		for j, satisfied := range subset {
-			_, _, _, _ = i, j, satisfied, indices
+			_, _, _, _, _ = i, j, satisfied, indices, litSet
 			// add a new literal.......
 		}
 	}

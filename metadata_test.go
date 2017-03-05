@@ -218,3 +218,41 @@ func TestUIDGenerator(t *testing.T) {
 		t.Error("UID generator did not return the proper values:\t%v, %v, %v", x1, x2, x3)
 	}
 }
+
+func TestStringProp(t *testing.T) {
+	m := encoder.NewMetadata(nil)
+	const label string = "foo"
+	const value string = "bar"
+	const bad string = "incorrect***value"
+	var p1 = encoder.StringProposition(label, value)
+	var p2 = encoder.StringProposition(label, bad)
+
+	m.AddLabel(label, value)
+
+	if !p1(m) {
+		t.Error("Added label %v with value %v, but when checking, label did not match.", label, value)
+	}
+
+	if p2(m) {
+		t.Error("Added label %v with value %v, but when checking, label matched %v", label, value, bad)
+	}
+}
+
+func TestIntProp(t *testing.T) {
+	m := encoder.NewMetadata(nil)
+	const label string = "foo"
+	const value int = 100
+	const bad int = -1
+	var p1 = encoder.IntProposition(label, value)
+	var p2 = encoder.IntProposition(label, bad)
+
+	m.AddLabel(label, value)
+
+	if !p1(m) {
+		t.Error("Added label %v with value %v, but when checking, label did not match.", label, value)
+	}
+
+	if p2(m) {
+		t.Error("Added label %v with value %v, but when checking, label matched %v", label, value, bad)
+	}
+}
