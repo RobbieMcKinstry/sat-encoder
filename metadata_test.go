@@ -44,7 +44,7 @@ func TestIsString(t *testing.T) {
 }
 
 func TestMatchesString(t *testing.T) {
-	m := encoder.NewMetadata(nil)
+	m := encoder.NewMetadata("empty", nil)
 	const label string = "foo"
 	const value string = "bar"
 	const bad string = "incorrect***value"
@@ -60,7 +60,7 @@ func TestMatchesString(t *testing.T) {
 }
 
 func TestMatchesInt(t *testing.T) {
-	m := encoder.NewMetadata(nil)
+	m := encoder.NewMetadata("empty", nil)
 	const label string = "foo"
 	const value int = 100
 	const bad int = 99
@@ -76,7 +76,7 @@ func TestMatchesInt(t *testing.T) {
 }
 
 func TestLtInt(t *testing.T) {
-	m := encoder.NewMetadata(nil)
+	m := encoder.NewMetadata("empty", nil)
 	const label string = "foo"
 	const value int = 100
 	const good int = 101
@@ -93,7 +93,7 @@ func TestLtInt(t *testing.T) {
 }
 
 func TestGtInt(t *testing.T) {
-	m := encoder.NewMetadata(nil)
+	m := encoder.NewMetadata("empty", nil)
 	const label string = "foo"
 	const value int = 100
 	const good int = 99
@@ -110,7 +110,7 @@ func TestGtInt(t *testing.T) {
 }
 
 func TestGtEqInt(t *testing.T) {
-	m := encoder.NewMetadata(nil)
+	m := encoder.NewMetadata("empty", nil)
 	const label string = "foo"
 	const value int = 100
 	const good int = 99
@@ -127,7 +127,7 @@ func TestGtEqInt(t *testing.T) {
 }
 
 func TestLtEqInt(t *testing.T) {
-	m := encoder.NewMetadata(nil)
+	m := encoder.NewMetadata("empty", nil)
 	const label string = "foo"
 	const value int = 100
 	const good int = 101
@@ -144,7 +144,7 @@ func TestLtEqInt(t *testing.T) {
 }
 
 func TestNEqInt(t *testing.T) {
-	m := encoder.NewMetadata(nil)
+	m := encoder.NewMetadata("empty", nil)
 	const label string = "foo"
 	const value int = 100
 	const bad int = 99
@@ -160,7 +160,7 @@ func TestNEqInt(t *testing.T) {
 }
 
 func TestLabelExistsError(t *testing.T) {
-	m := encoder.NewMetadata(nil)
+	m := encoder.NewMetadata("empty", nil)
 	const label string = "foo"
 	const value int = 100
 
@@ -172,7 +172,7 @@ func TestLabelExistsError(t *testing.T) {
 }
 
 func TestLabelMatches(t *testing.T) {
-	m := encoder.NewMetadata(nil)
+	m := encoder.NewMetadata("empty", nil)
 	const label string = "foo"
 	const value int = 100
 	const bad = "bar"
@@ -188,7 +188,7 @@ func TestLabelMatches(t *testing.T) {
 }
 
 func TestLabelMatchesWith(t *testing.T) {
-	m := encoder.NewMetadata(nil)
+	m := encoder.NewMetadata("empty", nil)
 	const label string = "foo"
 	const value int = 100
 	const bad = "bar"
@@ -220,7 +220,7 @@ func TestUIDGenerator(t *testing.T) {
 }
 
 func TestStringProp(t *testing.T) {
-	m := encoder.NewMetadata(nil)
+	m := encoder.NewMetadata("empty", nil)
 	const label string = "foo"
 	const value string = "bar"
 	const bad string = "incorrect***value"
@@ -239,7 +239,7 @@ func TestStringProp(t *testing.T) {
 }
 
 func TestIntProp(t *testing.T) {
-	m := encoder.NewMetadata(nil)
+	m := encoder.NewMetadata("empty", nil)
 	const label string = "foo"
 	const value int = 100
 	const bad int = -1

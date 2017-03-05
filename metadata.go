@@ -1,8 +1,9 @@
 package encoder
 
 // Owner must implement the Constrainer interface
-func NewMetadata(owner interface{}) *Metadata {
+func NewMetadata(name string, owner interface{}) *Metadata {
 	return &Metadata{
+		name:  name,
 		owner: owner,
 		data:  make(map[string]interface{}),
 	}
@@ -21,6 +22,10 @@ func NewConstraint(p Proposition) *Constraint {
 		uid:  UID(),
 		prop: p,
 	}
+}
+
+func (m *Metadata) Name() string {
+	return m.name
 }
 
 /*
