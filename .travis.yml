@@ -1,0 +1,12 @@
+language: go
+
+go:
+    - 1.8
+    - tip
+install:
+    - go get github.com/mattn/goveralls
+    - go get github.com/golang/dep
+    - cd $GOPATH/src/RobbieMcKinstry/sat-encoder && dep ensure
+
+script:
+      - $GOPATH/bin/goveralls -service=travis-ci
