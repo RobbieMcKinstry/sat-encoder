@@ -1,0 +1,14 @@
+{
+    "memo": "",
+    "projects": [
+        {
+            "name": "github.com/mitchellh/go-sat",
+            "branch": "master",
+            "revision": "fc0e735aff48989326f256121b5ed6fc585858c3",
+            "packages": [
+                ".",
+                "cnf"
+            ]
+        }
+    ]
+}

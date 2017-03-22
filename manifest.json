@@ -1,0 +1,7 @@
+{
+    "dependencies": {
+        "github.com/mitchellh/go-sat": {
+            "branch": "master"
+        }
+    }
+}
