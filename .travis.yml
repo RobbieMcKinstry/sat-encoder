@@ -7,6 +7,7 @@ go:
 install:
     - go get -v github.com/mattn/goveralls
     - go get -v github.com/golang/dep
+    - ls -la $GOPATH/bin
     - $GOPATH/bin/dep ensure
 
 script:
