@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/RobbieMcKinstry/sat-encoder/badge.svg?branch=master)](https://coveralls.io/github/RobbieMcKinstry/sat-encoder?branch=master)
+
 # sat-encoder
 Allows Go programs to encode metadata as SAT constraints
 
