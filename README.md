@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/RobbieMcKinstry/sat-encoder.svg?branch=master)](https://travis-ci.org/RobbieMcKinstry/sat-encoder)
+
 [![Coverage Status](https://coveralls.io/repos/github/RobbieMcKinstry/sat-encoder/badge.svg?branch=master)](https://coveralls.io/github/RobbieMcKinstry/sat-encoder?branch=master)
 
 # sat-encoder
